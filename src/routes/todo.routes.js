@@ -12,7 +12,7 @@ import { validateObjectId } from "../middlewares/validateObjectId.middleware.js"
 const router = express.Router();
 
 /**
- * TODO: Define routes
+ * Define routes
  *
  * POST   /              → createTodo
  * GET    /              → listTodos
@@ -22,6 +22,14 @@ const router = express.Router();
  * DELETE /:id           → deleteTodo (use validateObjectId middleware)
  */
 
-// Your routes here
+// Create and list routes (no ID validation needed)
+router.post("/", createTodo);
+router.get("/", listTodos);
+
+// Routes with ID parameters (need validation)
+router.get("/:id", validateObjectId, getTodo);
+router.patch("/:id", validateObjectId, updateTodo);
+router.patch("/:id/toggle", validateObjectId, toggleTodo);
+router.delete("/:id", validateObjectId, deleteTodo);
 
 export default router;
